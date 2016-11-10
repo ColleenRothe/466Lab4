@@ -118,7 +118,35 @@ class Host:
                 print (threading.currentThread().getName() + ': Ending')
                 return
         
+#You will need to come up with a message that encodes the state of your routing tables.
+# My advise would be to come up with a message class that has a to byte S() from byte S() functions.
 
+class Message:
+    table_item_length = 1 ##1???
+
+    def __init__(self, zero_one, zero_two, one_one, one_two):
+        self.zero_one = zero_one
+        self.zero_two = zero_two
+        self.one_one = one_one
+        self.one_two = one_two
+
+    def __str__(self):
+        return self.to_byte_S()
+
+    def to_byte_S(self):
+        byte_S = str(self.zero_one).zfill(self.table_item_length)
+        byte_S += str(self.zero_two).zfill(self.table_item_length)
+        byte_S += str(self.one_one).zfill(self.table_item_length)
+        byte_S += str(self.one_two).zfill(self.table_item_length)
+        return byte_S
+
+    @classmethod
+    def from_byte_S(self, byte_S):
+        zero_one = int(byte_S[0:Message.table_item_length])
+        zero_two = int(byte_S[Message.table_item_length: Message.table_item_length + Message.table_item_length])
+        one_one =  int(byte_S[Message.table_item_length + Message.table_item_length: Message.table_item_length + Message.table_item_length+Message.table_item_length])
+        one_two =  int(byte_S[Message.table_item_length + Message.table_item_length+Message.table_item_length : ])
+        return self(zero_one, zero_two, one_one,one_two)
 
 ## Implements a multi-interface router described in class
 class Router:
@@ -185,6 +213,12 @@ class Router:
     def send_routes(self, i):
         # a sample route update packet
         p = NetworkPacket(0, 'control', 'Sample routing table packet')
+
+        p2 = Message(0,1,2,3)
+        print("TEST MESSAGE")
+        print(p2.one_one)
+        print(p2.one_two)
+
         try:
             #TODO: add logic to send out a route update
             self.out_intf_L[i].put(p.to_byte_S(), True)
@@ -218,10 +252,6 @@ class Router:
                 zero_two = str(thing.get(0))
             elif 1 in thing:
                 one_two = str(thing.get(1))
-
-
-
-
 
         print('     Cost To:')
         print('        1 2')
