@@ -45,9 +45,9 @@ if __name__ == '__main__':
     link_layer.add_link(link.Link(client, 0, router_a, 0))
     link_layer.add_link(link.Link(router_a, 0, router_b, 0))
     link_layer.add_link(link.Link(router_b, 0, server, 0))
-    link_layer.add_link(link.Link(server, 0, router_a, 1))
-    link_layer.add_link(link.Link(router_a, 1, router_b, 1))
-    link_layer.add_link(link.Link(router_b, 1, client, 0))
+    link_layer.add_link(link.Link(server, 0, router_b, 1))
+    link_layer.add_link(link.Link(router_b, 1, router_a, 1))
+    link_layer.add_link(link.Link(router_a, 1, client, 0))
     
     
     #start all the objects
