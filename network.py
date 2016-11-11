@@ -213,18 +213,37 @@ class Router:
     def send_routes(self, i):
         # a sample route update packet
         p = NetworkPacket(0, 'control', 'Sample routing table packet')
+        dict = self.rt_tbl_D
+        zero_one = '~'
+        zero_two = '~'
+        one_one = '~'
+        one_two = '~'
 
-        p2 = Message(0,1,2,3)
+        if 1 in dict:
+            thing = dict.get(1)
+            if 0 in thing:
+                zero_one = str(thing.get(0))
+            elif 1 in thing:
+                one_one = str(thing.get(1))
+
+        if 2 in dict:
+            thing = dict.get(2)
+            if 0 in thing:
+                zero_two = str(thing.get(0))
+            elif 1 in thing:
+                one_two = str(thing.get(1))
+
+        p2 = Message(zero_one,zero_two,one_one,one_two)
         print("TEST MESSAGE")
         print(p2.one_one)
         print(p2.one_two)
 
         try:
             #TODO: add logic to send out a route update
-            self.out_intf_L[i].put(p.to_byte_S(), True)
-            print('%s: sending routing update "%s" from interface %d' % (self, p, i))
+            self.out_intf_L[i].put(p2.to_byte_S(), True)
+            print('%s: sending routing update "%s" from interface %d' % (self, p2, i))
         except queue.Full:
-            print('%s: packet "%s" lost on interface %d' % (self, p, i))
+            print('%s: packet "%s" lost on interface %d' % (self, p2, i))
             pass
         
     ## Print routing table
