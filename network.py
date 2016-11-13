@@ -211,9 +211,33 @@ class Router:
     #page 384
     def update_routes(self, p):
         #TODO: add logic to update the routing tables and
-        # possibly send out routing updates
+
         print('%s: Received routing update %s' % (self, p))
+
+
+        #get rid of the first six characters....only want the routing table
+        p2 = p.to_byte_S()
+        p2 = p2[6: len(p2)]
+
+        new_zero_one = p2[0:1]
+        new_zero_two = p2[1:2]
+
+        new_one_one =  p2[2:3]
+        new_one_two =  p2[3:4]
         
+        
+        print("My name is:")
+        print(self.name)
+
+        print("My table is:")
+        print(self.rt_tbl_D)
+
+        #need to compare what you get with what you have...
+        #if different...need to update all of your neighbors.
+
+
+
+
     ## send out route update
     # @param i Interface number on which to send out a routing update
 
