@@ -203,6 +203,10 @@ class Router:
         
     ## forward the packet according to the routing table
     #  @param p Packet containing routing information
+
+    #Modify function to update routing tables (bellman ford)
+    #based on updates from router.send_routes
+    #receiving an update may mean you should send one as well!!
     def update_routes(self, p):
         #TODO: add logic to update the routing tables and
         # possibly send out routing updates
@@ -212,7 +216,6 @@ class Router:
     # @param i Interface number on which to send out a routing update
     def send_routes(self, i):
         # a sample route update packet
-        p = NetworkPacket(0, 'control', 'Sample routing table packet')
         dict = self.rt_tbl_D
         zero_one = '~'
         zero_two = '~'
@@ -234,16 +237,22 @@ class Router:
                 one_two = str(thing.get(1))
 
         p2 = Message(zero_one,zero_two,one_one,one_two)
-        print("TEST MESSAGE")
-        print(p2.one_one)
-        print(p2.one_two)
+
+        #if you are router A...send it to B over interface 0
+        if self.name == 'A':
+            i = 0
+        #if you are router B...send it to A over interface 1
+        if self.name == 'B':
+            i = 1
+
+        p = NetworkPacket(0, 'control', p2.to_byte_S())
 
         try:
             #TODO: add logic to send out a route update
-            self.out_intf_L[i].put(p2.to_byte_S(), True)
-            print('%s: sending routing update "%s" from interface %d' % (self, p2, i))
+            self.out_intf_L[i].put(p.to_byte_S(), True)
+            print('%s: sending routing update "%s" from interface %d' % (self, p, i))
         except queue.Full:
-            print('%s: packet "%s" lost on interface %d' % (self, p2, i))
+            print('%s: packet "%s" lost on interface %d' % (self, p, i))
             pass
         
     ## Print routing table
@@ -273,9 +282,10 @@ class Router:
                 one_two = str(thing.get(1))
 
         print('     Cost To:')
-        print('        1 2')
-        print('From: 0 %s %s '%(zero_one, zero_two))
-        print('      1 %s %s '%(one_one, one_two))
+        print('         1 2')
+        print('        ----')
+        print('From: 0| %s %s '%(zero_one, zero_two))
+        print('      1| %s %s '%(one_one, one_two))
 
         ##print(self.rt_tbl_D)
 
