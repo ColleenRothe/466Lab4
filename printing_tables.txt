@@ -1,10 +1,12 @@
 Router_A: routing table
      Cost To:
-        1 2
-From: 0 ~ ~ 
-      1 1 ~ 
+         1 2
+        ----
+From: 0| ~ ~ 
+      1| 1 ~ 
 Router_B: routing table
      Cost To:
-        1 2
-From: 0 ~ 3 
-      1 ~ ~ 
+         1 2
+        ----
+From: 0| ~ 3 
+      1| ~ ~ 
