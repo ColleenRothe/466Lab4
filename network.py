@@ -211,28 +211,123 @@ class Router:
     #page 384
     def update_routes(self, p):
         #TODO: add logic to update the routing tables and
-
         print('%s: Received routing update %s' % (self, p))
+
+
+        #print("My name is:")
+        #print(self.name)
+
+        #print("My table is:")
+        #print(self.rt_tbl_D)
+
+        dict = self.rt_tbl_D
+        zero_one = '~'
+        zero_two = '~'
+        one_one = '~'
+        one_two = '~'
+
+        if 1 in dict:
+            thing = dict.get(1)
+            if 0 in thing:
+                zero_one = str(thing.get(0))
+            elif 1 in thing:
+                one_one = str(thing.get(1))
+
+        if 2 in dict:
+            thing = dict.get(2)
+            if 0 in thing:
+                zero_two = str(thing.get(0))
+            elif 1 in thing:
+                one_two = str(thing.get(1))
+
+
 
 
         #get rid of the first six characters....only want the routing table
         p2 = p.to_byte_S()
         p2 = p2[6: len(p2)]
 
+        ##get the new values from the routing table you got sent
+
         new_zero_one = p2[0:1]
         new_zero_two = p2[1:2]
 
         new_one_one =  p2[2:3]
         new_one_two =  p2[3:4]
-        
-        
-        print("My name is:")
-        print(self.name)
-
-        print("My table is:")
-        print(self.rt_tbl_D)
 
         #need to compare what you get with what you have...
+
+        if zero_one is '~' and new_zero_one is not '~':
+            zero_one = new_zero_one
+        elif zero_one is not '~' and new_zero_one is not '~' and new_zero_one < zero_one:
+            zero_one = new_zero_one
+
+        print("zero_two is ", zero_two, " and new_zero_two is ", new_zero_two)
+        if zero_two is '~' and new_zero_two is not '~':
+            print("DOING THIS2")
+            zero_two = new_zero_two
+        elif zero_two is not '~' and new_zero_two is not '~' and new_zero_two < zero_two:
+            zero_two = new_zero_two
+
+        if one_one is '~' and new_one_one is not '~':
+            print("DOING THIS3")
+            one_one = new_one_one
+        elif one_one is not '~' and new_one_one is not '~' and new_one_one < one_one:
+            one_one = new_one_one
+
+        if one_two is '~' and new_one_two is not '~':
+            one_two = new_one_two
+        elif one_two is not '~' and new_one_two is not '~' and new_one_two < one_two:
+            one_two = new_one_two
+
+
+        table = self.rt_tbl_D
+        #print(table)
+
+        if 1 in table:
+            if 0 in table[1]:
+                table[1][0]= zero_one
+            else:
+                table[1]= {0: zero_one}
+            if 1 in table[1]:
+                table[1][1] = one_one
+            else:
+                table[1] = {1: one_one}
+        else:
+            table[1]={0: zero_one, 1: one_one}
+
+        if 2 in table:
+            if 0 in table[2]:
+                table[2][0]= zero_two
+            else:
+                table[2]= {0: zero_two}
+            if 1 in table[2]:
+                table[2][1] = one_two
+            else:
+                table[2] = {1: one_two}
+        else:
+            table[2]={0: zero_two, 1: one_two}
+
+
+        if 1 in table:
+            thing = table.get(1)
+            if 1 in thing:
+                thing2 = thing.get(1)
+                thing2 = one_one
+
+        print("TESTING THIS", table[1][1])
+
+
+        self.rt_tbl_D.clear()
+        self.rt_tbl_D = table
+
+        if self.name == 'A':
+            self.send_routes(0)
+        if self.name == 'B':
+            self.send_routes(1)
+
+        print("NEW ROUTE!!!!!!")
+        self.print_routes()
         #if different...need to update all of your neighbors.
 
 
