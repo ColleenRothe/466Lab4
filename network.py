@@ -207,6 +207,8 @@ class Router:
     #Modify function to update routing tables (bellman ford)
     #based on updates from router.send_routes
     #receiving an update may mean you should send one as well!!
+
+    #page 384
     def update_routes(self, p):
         #TODO: add logic to update the routing tables and
         # possibly send out routing updates
@@ -214,6 +216,14 @@ class Router:
         
     ## send out route update
     # @param i Interface number on which to send out a routing update
+
+    #send routes based on link state protocol
+    #page 379...
+        #all link costs are known
+        #each node boradcasts link-state packets to all other nodes in network
+            #each link state packet contains the identities and costs of its attached links
+        #dijkstra?
+
     def send_routes(self, i):
         # a sample route update packet
         dict = self.rt_tbl_D
