@@ -1,0 +1,40 @@
+Colleen-Rothes-MacBook-Pro:prog4 colleenrothe$ python3 simulation.py
+Host_1: Starting
+Host_2: Starting
+Router_A: Starting
+Router_B: Starting
+Network: Starting
+Router_A: sending routing update "000002~~1~" from interface 0
+Link Router_A-0 to Router_B-0: transmitting packet "000002~~1~"
+Router_B: Received routing update 000002~~1~
+Host_1: sending packet "000021Sample data 0"
+Router_B: sending routing update "000002~31~" from interface 1
+Router_A: Received routing update 000002~31~
+Link Router_B-1 to Router_A-1: transmitting packet "000002~31~"
+Router_A: sending routing update "000002~31~" from interface 0
+Link Host_1-0 to Router_A-0: transmitting packet "000021Sample data 0"
+Link Router_A-0 to Router_B-0: transmitting packet "000002~31~"
+Router_B: Received routing update 000002~31~
+Link Router_A-0 to Router_B-0: transmitting packet "000021Sample data 0"
+Router_A: forwarding packet "000021Sample data 0" from interface 0 to 0
+Router_B: forwarding packet "000021Sample data 0" from interface 0 to 0
+Host_2: received packet "000021Sample data 0"
+Link Router_B-0 to Host_2-0: transmitting packet "000021Sample data 0"
+Router_A: routing table
+     Cost To:
+         1 2
+        ----
+From: 0| ~ 3 
+      1| 1 ~ 
+Router_B: routing table
+     Cost To:
+         1 2
+        ----
+From: 0| ~ 3 
+      1| 1 ~ 
+Host_1: Ending
+Host_2: Ending
+Router_A: Ending
+Router_B: Ending
+Network: Ending
+All simulation threads joined
