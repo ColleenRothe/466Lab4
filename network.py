@@ -212,13 +212,7 @@ class Router:
     def update_routes(self, p):
         #TODO: add logic to update the routing tables and
         print('%s: Received routing update %s' % (self, p))
-
-
-        #print("My name is:")
-        #print(self.name)
-
-        #print("My table is:")
-        #print(self.rt_tbl_D)
+        send = True
 
         dict = self.rt_tbl_D
         zero_one = '~'
@@ -230,18 +224,15 @@ class Router:
             thing = dict.get(1)
             if 0 in thing:
                 zero_one = str(thing.get(0))
-            elif 1 in thing:
+            if 1 in thing:
                 one_one = str(thing.get(1))
 
         if 2 in dict:
             thing = dict.get(2)
             if 0 in thing:
                 zero_two = str(thing.get(0))
-            elif 1 in thing:
+            if 1 in thing:
                 one_two = str(thing.get(1))
-
-
-
 
         #get rid of the first six characters....only want the routing table
         p2 = p.to_byte_S()
@@ -259,78 +250,46 @@ class Router:
 
         if zero_one is '~' and new_zero_one is not '~':
             zero_one = new_zero_one
+            send = False
         elif zero_one is not '~' and new_zero_one is not '~' and new_zero_one < zero_one:
+            send = False
             zero_one = new_zero_one
 
-        print("zero_two is ", zero_two, " and new_zero_two is ", new_zero_two)
         if zero_two is '~' and new_zero_two is not '~':
-            print("DOING THIS2")
+            send = False
             zero_two = new_zero_two
         elif zero_two is not '~' and new_zero_two is not '~' and new_zero_two < zero_two:
+            send = False
             zero_two = new_zero_two
 
         if one_one is '~' and new_one_one is not '~':
-            print("DOING THIS3")
+            send = False
             one_one = new_one_one
         elif one_one is not '~' and new_one_one is not '~' and new_one_one < one_one:
+            send = False
             one_one = new_one_one
 
         if one_two is '~' and new_one_two is not '~':
             one_two = new_one_two
+            send = False
         elif one_two is not '~' and new_one_two is not '~' and new_one_two < one_two:
             one_two = new_one_two
+            send = False
 
 
-        table = self.rt_tbl_D
-        #print(table)
 
-        if 1 in table:
-            if 0 in table[1]:
-                table[1][0]= zero_one
-            else:
-                table[1]= {0: zero_one}
-            if 1 in table[1]:
-                table[1][1] = one_one
-            else:
-                table[1] = {1: one_one}
-        else:
-            table[1]={0: zero_one, 1: one_one}
+        self.rt_tbl_D[1]={0: zero_one, 1: one_one}
+        self.rt_tbl_D[2]={0: zero_two, 1: one_two}
 
-        if 2 in table:
-            if 0 in table[2]:
-                table[2][0]= zero_two
-            else:
-                table[2]= {0: zero_two}
-            if 1 in table[2]:
-                table[2][1] = one_two
-            else:
-                table[2] = {1: one_two}
-        else:
-            table[2]={0: zero_two, 1: one_two}
+        #print("UPDATE table is", self.rt_tbl_D)
 
 
-        if 1 in table:
-            thing = table.get(1)
-            if 1 in thing:
-                thing2 = thing.get(1)
-                thing2 = one_one
-
-        print("TESTING THIS", table[1][1])
-
-
-        self.rt_tbl_D.clear()
-        self.rt_tbl_D = table
-
-        if self.name == 'A':
-            self.send_routes(0)
-        if self.name == 'B':
-            self.send_routes(1)
-
-        print("NEW ROUTE!!!!!!")
-        self.print_routes()
-        #if different...need to update all of your neighbors.
-
-
+        #need some kind of boolean/loop to keep going until no change
+        if send is False:
+            if self.name == 'A':
+                self.send_routes(0)
+            if self.name == 'B':
+                self.send_routes(1)
 
 
     ## send out route update
@@ -346,6 +305,7 @@ class Router:
     def send_routes(self, i):
         # a sample route update packet
         dict = self.rt_tbl_D
+        #print("SEND TABLE IS",self.rt_tbl_D)
         zero_one = '~'
         zero_two = '~'
         one_one = '~'
@@ -355,14 +315,14 @@ class Router:
             thing = dict.get(1)
             if 0 in thing:
                 zero_one = str(thing.get(0))
-            elif 1 in thing:
+            if 1 in thing:
                 one_one = str(thing.get(1))
 
         if 2 in dict:
             thing = dict.get(2)
             if 0 in thing:
                 zero_two = str(thing.get(0))
-            elif 1 in thing:
+            if 1 in thing:
                 one_two = str(thing.get(1))
 
         p2 = Message(zero_one,zero_two,one_one,one_two)
@@ -400,14 +360,14 @@ class Router:
             thing=dict.get(1)
             if 0 in thing:
                 zero_one = str(thing.get(0))
-            elif 1 in thing:
+            if 1 in thing:
                 one_one = str(thing.get(1))
 
         if 2 in dict:
             thing=dict.get(2)
             if 0 in thing:
                 zero_two = str(thing.get(0))
-            elif 1 in thing:
+            if 1 in thing:
                 one_two = str(thing.get(1))
 
         print('     Cost To:')
@@ -419,8 +379,6 @@ class Router:
         ##print(self.rt_tbl_D)
 
 
-        
-                
     ## thread target for the host to keep forwarding data
     def run(self):
         print (threading.currentThread().getName() + ': Starting')
