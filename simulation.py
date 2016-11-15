@@ -7,6 +7,7 @@ import network
 import link
 import threading
 from time import sleep
+import sys
 
 ##configuration parameters
 router_queue_size = 0 #0 means unlimited
@@ -24,15 +25,13 @@ if __name__ == '__main__':
     #create routers and routing tables for connected clients (subnets)
     router_a_rt_tbl_D = {1: {1: 1}} # packet to host 1 through interface 1 for cost 1
     router_a = network.Router(name='A', 
-                              in_intf_count=2, 
-                              out_intf_cost_L=[1,1], 
+                              intf_cost_L=[1,1], 
                               rt_tbl_D = router_a_rt_tbl_D, 
                               max_queue_size=router_queue_size)
     object_L.append(router_a)
     router_b_rt_tbl_D = {2: {0: 3}} # packet to host 2 through interface 0 for cost 3
     router_b = network.Router(name='B', 
-                              in_intf_count=2, 
-                              out_intf_cost_L=[3,1], 
+                              intf_cost_L=[1,3], 
                               rt_tbl_D = router_b_rt_tbl_D, 
                               max_queue_size=router_queue_size)
     object_L.append(router_b)
@@ -43,11 +42,8 @@ if __name__ == '__main__':
     
     #add all the links
     link_layer.add_link(link.Link(client, 0, router_a, 0))
-    link_layer.add_link(link.Link(router_a, 0, router_b, 0))
-    link_layer.add_link(link.Link(router_b, 0, server, 0))
-    link_layer.add_link(link.Link(server, 0, router_b, 1))
-    link_layer.add_link(link.Link(router_b, 1, router_a, 1))
-    link_layer.add_link(link.Link(router_a, 1, client, 0))
+    link_layer.add_link(link.Link(router_a, 1, router_b, 0))
+    link_layer.add_link(link.Link(router_b, 1, server, 0))
     
     
     #start all the objects
@@ -59,11 +55,11 @@ if __name__ == '__main__':
         t.start()
     
     #send out routing information from router A to router B interface 0
-    router_a.send_routes(0)
+    router_a.send_routes(1)
     
     #create some send events    
     for i in range(1):
-        client.udt_send(2, 'Sample data %d' % i)
+        client.udt_send(2, 'Sample client data %d' % i)
         
     #give the network sufficient time to transfer all packets before quitting
     sleep(simulation_time)
