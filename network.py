@@ -223,7 +223,7 @@ class Router:
     def update_routes(self, p, i):
         # TODO: add logic to update the routing tables and
         print('%s: Received routing update %s' % (self, p))
-        send = True
+        #send = True
 
         dict = self.rt_tbl_D
         zero_one = '~'
@@ -294,11 +294,12 @@ class Router:
 
 
         # need some kind of boolean/loop to keep going until no change
-        if send is False:
-            if self.name == 'A':
-                self.send_routes(0)
-            if self.name == 'B':
-                self.send_routes(1)
+        #if send is False:
+        if self.name == 'A':
+            self.send_routes(1)
+        if self.name == 'B':
+            self.send_routes(0)
+
 
     ## send out route update
     # @param i Interface number on which to send out a routing update
@@ -327,18 +328,11 @@ class Router:
 
         p2 = Message(zero_one, zero_two, one_one, one_two)
 
-        # if you are router A...send it to B over interface 0
-        if self.name == 'A':
-            i = 0
-        # if you are router B...send it to A over interface 1
-        if self.name == 'B':
-            i = 1
-
         p = NetworkPacket(0, 'control', p2.to_byte_S())
 
         try:
             # TODO: add logic to send out a route update
-            self.intf_L[i].put(p.to_byte_S(), True)
+            self.intf_L[i].put(p.to_byte_S(),'out', True)
             print('%s: sending routing update "%s" from interface %d' % (self, p, i))
         except queue.Full:
             print('%s: packet "%s" lost on interface %d' % (self, p, i))
