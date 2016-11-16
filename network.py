@@ -135,6 +135,35 @@ class Host:
                 print (threading.currentThread().getName() + ': Ending')
                 return
         
+#You will need to come up with a message that encodes the state of your routing tables.
+# My advise would be to come up with a message class that has a to byte S() from byte S() functions.
+
+class Message:
+    table_item_length = 1 ##1???
+
+    def __init__(self, zero_one, zero_two, one_one, one_two):
+        self.zero_one = zero_one
+        self.zero_two = zero_two
+        self.one_one = one_one
+        self.one_two = one_two
+
+    def __str__(self):
+        return self.to_byte_S()
+
+    def to_byte_S(self):
+        byte_S = str(self.zero_one).zfill(self.table_item_length)
+        byte_S += str(self.zero_two).zfill(self.table_item_length)
+        byte_S += str(self.one_one).zfill(self.table_item_length)
+        byte_S += str(self.one_two).zfill(self.table_item_length)
+        return byte_S
+
+    @classmethod
+    def from_byte_S(self, byte_S):
+        zero_one = int(byte_S[0:Message.table_item_length])
+        zero_two = int(byte_S[Message.table_item_length: Message.table_item_length + Message.table_item_length])
+        one_one =  int(byte_S[Message.table_item_length + Message.table_item_length: Message.table_item_length + Message.table_item_length+Message.table_item_length])
+        one_two =  int(byte_S[Message.table_item_length + Message.table_item_length+Message.table_item_length : ])
+        return self(zero_one, zero_two, one_one,one_two)
 
 
 ## Implements a multi-interface router described in class
@@ -194,18 +223,126 @@ class Router:
     #  @param p Packet containing routing information
     def update_routes(self, p, i):
         #TODO: add logic to update the routing tables and
-        # possibly send out routing updates
-        print('%s: Received routing update %s from interface %d' % (self, p, i))
+        print('%s: Received routing update %s' % (self, p))
+        send = True
+
+        dict = self.rt_tbl_D
+        zero_one = '~'
+        zero_two = '~'
+        one_one = '~'
+        one_two = '~'
+
+        if 1 in dict:
+            thing = dict.get(1)
+            if 0 in thing:
+                zero_one = str(thing.get(0))
+            if 1 in thing:
+                one_one = str(thing.get(1))
+
+        if 2 in dict:
+            thing = dict.get(2)
+            if 0 in thing:
+                zero_two = str(thing.get(0))
+            if 1 in thing:
+                one_two = str(thing.get(1))
+
+        #get rid of the first six characters....only want the routing table
+        p2 = p.to_byte_S()
+        p2 = p2[6: len(p2)]
+
+        ##get the new values from the routing table you got sent
+
+        new_zero_one = p2[0:1]
+        new_zero_two = p2[1:2]
+
+        new_one_one =  p2[2:3]
+        new_one_two =  p2[3:4]
+
+        #need to compare what you get with what you have...
+
+        if zero_one is '~' and new_zero_one is not '~':
+            zero_one = new_zero_one
+            send = False
+        elif zero_one is not '~' and new_zero_one is not '~' and new_zero_one < zero_one:
+            send = False
+            zero_one = new_zero_one
+
+        if zero_two is '~' and new_zero_two is not '~':
+            send = False
+            zero_two = new_zero_two
+        elif zero_two is not '~' and new_zero_two is not '~' and new_zero_two < zero_two:
+            send = False
+            zero_two = new_zero_two
+
+        if one_one is '~' and new_one_one is not '~':
+            send = False
+            one_one = new_one_one
+        elif one_one is not '~' and new_one_one is not '~' and new_one_one < one_one:
+            send = False
+            one_one = new_one_one
+
+        if one_two is '~' and new_one_two is not '~':
+            one_two = new_one_two
+            send = False
+        elif one_two is not '~' and new_one_two is not '~' and new_one_two < one_two:
+            one_two = new_one_two
+            send = False
+
+
+
+        self.rt_tbl_D[1]={0: zero_one, 1: one_one}
+        self.rt_tbl_D[2]={0: zero_two, 1: one_two}
+
+        #print("UPDATE table is", self.rt_tbl_D)
+
+
+        #need some kind of boolean/loop to keep going until no change
+        if send is False:
+            if self.name == 'A':
+                self.send_routes(0)
+            if self.name == 'B':
+                self.send_routes(1)
         
     ## send out route update
     # @param i Interface number on which to send out a routing update
     def send_routes(self, i):
-        # a sample route update packet
-        p = NetworkPacket(0, 'control', 'Sample routing table packet')
+      # a sample route update packet
+        dict = self.rt_tbl_D
+        #print("SEND TABLE IS",self.rt_tbl_D)
+        zero_one = '~'
+        zero_two = '~'
+        one_one = '~'
+        one_two = '~'
+
+        if 1 in dict:
+            thing = dict.get(1)
+            if 0 in thing:
+                zero_one = str(thing.get(0))
+            if 1 in thing:
+                one_one = str(thing.get(1))
+
+        if 2 in dict:
+            thing = dict.get(2)
+            if 0 in thing:
+                zero_two = str(thing.get(0))
+            if 1 in thing:
+                one_two = str(thing.get(1))
+
+        p2 = Message(zero_one,zero_two,one_one,one_two)
+
+        #if you are router A...send it to B over interface 0
+        if self.name == 'A':
+            i = 0
+        #if you are router B...send it to A over interface 1
+        if self.name == 'B':
+            i = 1
+
+        p = NetworkPacket(0, 'control', p2.to_byte_S())
+
         try:
             #TODO: add logic to send out a route update
+            self.out_intf_L[i].put(p.to_byte_S(), True)
             print('%s: sending routing update "%s" from interface %d' % (self, p, i))
-            self.intf_L[i].put(p.to_byte_S(), 'out', True)
         except queue.Full:
             print('%s: packet "%s" lost on interface %d' % (self, p, i))
             pass
@@ -215,7 +352,34 @@ class Router:
         print('%s: routing table' % self)
         #TODO: print the routes as a two dimensional table for easy inspection
         # Currently the function just prints the route table as a dictionary
-        print(self.rt_tbl_D)
+        dict = self.rt_tbl_D
+
+        zero_one = '~'
+        zero_two = '~'
+        one_one = '~'
+        one_two = '~'
+
+        if 1 in dict:
+            thing=dict.get(1)
+            if 0 in thing:
+                zero_one = str(thing.get(0))
+            if 1 in thing:
+                one_one = str(thing.get(1))
+
+        if 2 in dict:
+            thing=dict.get(2)
+            if 0 in thing:
+                zero_two = str(thing.get(0))
+            if 1 in thing:
+                one_two = str(thing.get(1))
+
+        print('     Cost To:')
+        print('         1 2')
+        print('        ----')
+        print('From: 0| %s %s '%(zero_one, zero_two))
+        print('      1| %s %s '%(one_one, one_two))
+
+        ##print(self.rt_tbl_D)
         
                 
     ## thread target for the host to keep forwarding data
