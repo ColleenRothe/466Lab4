@@ -223,7 +223,7 @@ class Router:
     def update_routes(self, p, i):
         # TODO: add logic to update the routing tables and
         print('%s: Received routing update %s' % (self, p))
-        #send = True
+        send = True
 
         dict = self.rt_tbl_D
         zero_one = '~'
@@ -294,11 +294,11 @@ class Router:
 
 
         # need some kind of boolean/loop to keep going until no change
-        #if send is False:
-        if self.name == 'A':
-            self.send_routes(1)
-        if self.name == 'B':
-            self.send_routes(0)
+        if send is False:
+            if self.name == 'A':
+                self.send_routes(1)
+            if self.name == 'B':
+                self.send_routes(0)
 
 
     ## send out route update
