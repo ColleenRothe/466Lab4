@@ -1,0 +1,50 @@
+Colleen-Rothes-MacBook-Pro:prog4 colleenrothe$ python3 simulation.py
+Created link Link Host_1-0 - Router_A-0
+Created link Link Router_A-1 - Router_B-0
+Created link Link Router_B-1 - Host_2-0
+Host_1: Starting
+Host_2: Starting
+Router_A: Starting
+Router_B: Starting
+Network: Starting
+Router_A: sending routing update "0000021~~~" from interface 1
+Link Router_A-1 - Router_B-0: transmitting packet "0000021~~~" on Router_A 1 -> Router_B, 0
+Host_1: sending packet "000021Sample client data 0"
+Router_B: Received routing update 0000021~~~
+Link Host_1-0 - Router_A-0: transmitting packet "000021Sample client data 0" on Host_1 0 -> Router_A, 0
+Router_A: forwarding packet "000021Sample client data 0" from interface 0 to 1
+Router_B: sending routing update "0000021~~3" from interface 0
+Link Router_A-1 - Router_B-0: transmitting packet "000021Sample client data 0" on Router_A 1 -> Router_B, 0
+Router_B: forwarding packet "000021Sample client data 0" from interface 0 to 1
+Link Router_A-1 - Router_B-0: transmitting packet "0000021~~3" on Router_B 0 -> Router_A, 1
+Router_A: Received routing update 0000021~~3
+Router_A: sending routing update "0000021~~3" from interface 1
+Link Router_B-1 - Host_2-0: transmitting packet "000021Sample client data 0" on Router_B 1 -> Host_2, 0
+Link Router_A-1 - Router_B-0: transmitting packet "0000021~~3" on Router_A 1 -> Router_B, 0
+Router_B: Received routing update 0000021~~3
+Host_2: received packet "000021Sample client data 0"
+Router_A: routing table
+     Cost To:
+         1 2
+        ----
+From: 0| 1 ~ 
+      1| ~ 3 
+Router_B: routing table
+     Cost To:
+         1 2
+        ----
+From: 0| 1 ~ 
+      1| ~ 3 
+Host_2: sending packet "000011Sample client data 0"
+Link Router_B-1 - Host_2-0: transmitting packet "000011Sample client data 0" on Host_2 0 -> Router_B, 1
+Router_B: forwarding packet "000011Sample client data 0" from interface 1 to 0
+Link Router_A-1 - Router_B-0: transmitting packet "000011Sample client data 0" on Router_B 0 -> Router_A, 1
+Router_A: forwarding packet "000011Sample client data 0" from interface 1 to 0
+Link Host_1-0 - Router_A-0: transmitting packet "000011Sample client data 0" on Router_A 0 -> Host_1, 0
+Host_1: received packet "000011Sample client data 0"
+Router_A: Ending
+Router_B: Ending
+Network: Ending
+Host_1: Ending
+Host_2: Ending
+All simulation threads joined
