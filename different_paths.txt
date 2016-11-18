@@ -1,0 +1,248 @@
+Created link Link Host_1-0 - Router_A-0
+Created link Link Host_2-0 - Router_A-3
+Created link Link Router_A-1 - Router_B-0
+Created link Link Router_A-2 - Router_C-0
+Created link Link Router_B-1 - Router_D-0
+Created link Link Router_C-1 - Router_D-2
+Created link Link Router_D-1 - Host_3-0
+Host_1: Starting
+Host_2: Starting
+Host_3: Starting
+Router_A: Starting
+Router_B: Starting
+Router_C: Starting
+Router_D: Starting
+Network: Starting
+Router_A: sending routing update "00000000002A41~~~~~~1~~~~0000~1~~~~2~~~~~" from interface 1
+Link Router_A-1 - Router_B-0: transmitting packet "00000000002A41~~~~~~1~~~~0000~1~~~~2~~~~~" on Router_A 1 -> Router_B, 0
+Router_A: sending routing update "00000000002A41~~~~~~1~~~~0000~1~~~~2~~~~~" from interface 2
+Router_B: Received routing update 00000000002A41~~~~~~1~~~~0000~1~~~~2~~~~~
+Router_B: sending routing update "0000000000200000000000000B2~~~~~~1~00~~~2" from interface 0
+Link Router_A-1 - Router_B-0: transmitting packet "0000000000200000000000000B2~~~~~~1~00~~~2" on Router_B 0 -> Router_A, 1
+Router_A: Received routing update 0000000000200000000000000B2~~~~~~1~00~~~2
+Router_B: sending routing update "0000000000200000000000000B2~~~~~~1~00~~~2" from interface 1
+Router_C: Received routing update 00000000002A41~~~~~~1~~~~0000~1~~~~2~~~~~
+Router_B: sending routing update "0000000000200000000000000B22~2~~~1~003~~2" from interface 0
+Link Router_A-2 - Router_C-0: transmitting packet "00000000002A41~~~~~~1~~~~0000~1~~~~2~~~~~" on Router_A 2 -> Router_C, 0
+Router_A: sending routing update "00000000002A41~~~~~~1~~~~0000~1~~~~2~~3~~" from interface 1
+Router_B: sending routing update "0000000000200000000000000B22~2~~~1~003~~2" from interface 1
+Link Router_A-2 - Router_C-0: transmitting packet "0000000000200000000000000C2~~~~~~2~~~00~1" on Router_C 0 -> Router_A, 2
+Router_C: sending routing update "0000000000200000000000000C2~~~~~~2~~~00~1" from interface 0
+Router_C: sending routing update "0000000000200000000000000C23~3~~~2~3~00~1" from interface 0
+Router_D: Received routing update 0000000000200000000000000B2~~~~~~1~00~~~2
+Link Router_B-1 - Router_D-0: transmitting packet "0000000000200000000000000B2~~~~~~1~00~~~2" on Router_B 1 -> Router_D, 0
+Router_C: sending routing update "0000000000200000000000000C23~3~~~2~3~00~1" from interface 1
+Router_D: sending routing update "000000000020000000D3~~~~~~~1~3~~2~~~~1000" from interface 0
+Router_C: sending routing update "0000000000200000000000000C23~3~~~2~3~00~1" from interface 1
+Router_A: sending routing update "00000000002A41~~~~~~1~~~~0000~1~~~~2~~3~~" from interface 2
+Router_D: sending routing update "000000000020000000D3~~~~~~~1~3~~2~~~~1000" from interface 0
+Router_A: Received routing update 0000000000200000000000000C2~~~~~~2~~~00~1
+Router_D: sending routing update "000000000020000000D3~~~~~~~1~3~~2~~~~1000" from interface 2
+Link Router_B-1 - Router_D-0: transmitting packet "000000000020000000D3~~~~~~~1~3~~2~~~~1000" on Router_D 0 -> Router_B, 1
+Router_A: sending routing update "00000000002A41~~~~~~1~~~~0000~1~~~~2~~33~" from interface 1
+Router_B: Received routing update 000000000020000000D3~~~~~~~1~3~~2~~~~1000
+Link Router_C-1 - Router_D-2: transmitting packet "0000000000200000000000000C23~3~~~2~3~00~1" on Router_C 1 -> Router_D, 2
+Router_D: sending routing update "000000000020000000D3~~~~~~~1~3~~2~~~~1000" from interface 2
+Router_A: sending routing update "00000000002A41~~~~~~1~~~~0000~1~~~~2~~33~" from interface 2
+Router_B: sending routing update "0000000000200000000000000B22~2~~3150033~2" from interface 0
+Router_D: Received routing update 0000000000200000000000000C23~3~~~2~3~00~1
+Link Router_C-1 - Router_D-2: transmitting packet "000000000020000000D3~~~~~~~1~3~~2~~~~1000" on Router_D 2 -> Router_C, 1
+Router_B: sending routing update "0000000000200000000000000B22~2~~3150033~2" from interface 1
+Router_D: sending routing update "000000000020000000D3~~4~~4~1~3~32~4~~1000" from interface 0
+Router_C: Received routing update 000000000020000000D3~~~~~~~1~3~~2~~~~1000
+Link Router_A-1 - Router_B-0: transmitting packet "00000000002A41~~~~~~1~~~~0000~1~~~~2~~3~~" on Router_A 1 -> Router_B, 0
+Router_C: sending routing update "0000000000200000000000000C23~3~~2243300~1" from interface 0
+Router_B: Received routing update 00000000002A41~~~~~~1~~~~0000~1~~~~2~~3~~
+Router_A: Received routing update 0000000000200000000000000B22~2~~~1~003~~2
+Router_C: sending routing update "0000000000200000000000000C23~3~~2243300~1" from interface 1
+Router_B: sending routing update "0000000000200000000000000B22626~315003342" from interface 0
+Router_A: sending routing update "00000000002A413~~~3~1~~~~0000~1~~~42~~33~" from interface 1
+Router_B: sending routing update "0000000000200000000000000B22626~315003342" from interface 1
+Link Router_A-1 - Router_B-0: transmitting packet "0000000000200000000000000B22~2~~~1~003~~2" on Router_B 0 -> Router_A, 1
+Router_D: sending routing update "000000000020000000D3~~4~~4~1~3~32~4~~1000" from interface 2
+Router_A: sending routing update "00000000002A413~~~3~1~~~~0000~1~~~42~~33~" from interface 2
+Router_C: Received routing update 00000000002A41~~~~~~1~~~~0000~1~~~~2~~3~~
+Link Router_A-2 - Router_C-0: transmitting packet "00000000002A41~~~~~~1~~~~0000~1~~~~2~~3~~" on Router_A 2 -> Router_C, 0
+Link Router_A-2 - Router_C-0: transmitting packet "0000000000200000000000000C23~3~~~2~3~00~1" on Router_C 0 -> Router_A, 2
+Router_A: Received routing update 0000000000200000000000000C23~3~~~2~3~00~1
+Router_C: sending routing update "0000000000200000000000000C23535~224330051" from interface 0
+Router_A: sending routing update "00000000002A4135~~351~~~~0000~15~~42~~33~" from interface 1
+Link Router_B-1 - Router_D-0: transmitting packet "0000000000200000000000000B22~2~~~1~003~~2" on Router_B 1 -> Router_D, 0
+Router_D: Received routing update 0000000000200000000000000B22~2~~~1~003~~2
+Router_C: sending routing update "0000000000200000000000000C23535~224330051" from interface 1
+Router_A: sending routing update "00000000002A4135~~351~~~~0000~15~~42~~33~" from interface 2
+Link Router_B-1 - Router_D-0: transmitting packet "000000000020000000D3~~~~~~~1~3~~2~~~~1000" on Router_D 0 -> Router_B, 1
+Router_D: sending routing update "000000000020000000D34~44~4~1~3~32~45~1000" from interface 0
+Router_B: Received routing update 000000000020000000D3~~~~~~~1~3~~2~~~~1000
+Link Router_C-1 - Router_D-2: transmitting packet "0000000000200000000000000C23~3~~~2~3~00~1" on Router_C 1 -> Router_D, 2
+Router_B: sending routing update "0000000000200000000000000B226265315003342" from interface 0
+Router_D: sending routing update "000000000020000000D34~44~4~1~3~32~45~1000" from interface 2
+Link Router_C-1 - Router_D-2: transmitting packet "000000000020000000D3~~~~~~~1~3~~2~~~~1000" on Router_D 2 -> Router_C, 1
+Router_C: Received routing update 000000000020000000D3~~~~~~~1~3~~2~~~~1000
+Link Router_A-1 - Router_B-0: transmitting packet "00000000002A41~~~~~~1~~~~0000~1~~~~2~~33~" on Router_A 1 -> Router_B, 0
+Router_C: sending routing update "0000000000200000000000000C235356224330051" from interface 0
+Router_B: sending routing update "0000000000200000000000000B226265315003342" from interface 1
+Router_A: Received routing update 0000000000200000000000000B22~2~~3150033~2
+Router_C: sending routing update "0000000000200000000000000C235356224330051" from interface 1
+Router_B: Received routing update 00000000002A41~~~~~~1~~~~0000~1~~~~2~~33~
+Router_A: sending routing update "00000000002A4135~~351~48~0000~15~~42~~33~" from interface 1
+Link Router_A-1 - Router_B-0: transmitting packet "0000000000200000000000000B22~2~~3150033~2" on Router_B 0 -> Router_A, 1
+Router_D: Received routing update 0000000000200000000000000C23~3~~~2~3~00~1
+Router_C: Received routing update 00000000002A41~~~~~~1~~~~0000~1~~~~2~~33~
+Router_A: sending routing update "00000000002A4135~~351~48~0000~15~~42~~33~" from interface 2
+Link Router_A-2 - Router_C-0: transmitting packet "00000000002A41~~~~~~1~~~~0000~1~~~~2~~33~" on Router_A 2 -> Router_C, 0
+Link Router_A-2 - Router_C-0: transmitting packet "0000000000200000000000000C23~3~~2243300~1" on Router_C 0 -> Router_A, 2
+Link Router_B-1 - Router_D-0: transmitting packet "0000000000200000000000000B22~2~~3150033~2" on Router_B 1 -> Router_D, 0
+Router_A: Received routing update 0000000000200000000000000C23~3~~2243300~1
+Link Router_B-1 - Router_D-0: transmitting packet "000000000020000000D3~~4~~4~1~3~32~4~~1000" on Router_D 0 -> Router_B, 1
+Router_D: Received routing update 0000000000200000000000000B22~2~~3150033~2
+Router_B: Received routing update 000000000020000000D3~~4~~4~1~3~32~4~~1000
+Router_A: sending routing update "00000000002A4135~~351~44~0000~15~~42~~33~" from interface 1
+Router_D: sending routing update "000000000020000000D34~44~45173~32~45~1000" from interface 0
+Link Router_C-1 - Router_D-2: transmitting packet "0000000000200000000000000C23~3~~2243300~1" on Router_C 1 -> Router_D, 2
+Router_D: sending routing update "000000000020000000D34~44~45173~32~45~1000" from interface 2
+Link Router_C-1 - Router_D-2: transmitting packet "000000000020000000D3~~4~~4~1~3~32~4~~1000" on Router_D 2 -> Router_C, 1
+Router_C: Received routing update 000000000020000000D3~~4~~4~1~3~32~4~~1000
+Router_D: Received routing update 0000000000200000000000000C23~3~~2243300~1
+Router_A: sending routing update "00000000002A4135~~351~44~0000~15~~42~~33~" from interface 2
+Router_D: sending routing update "000000000020000000D34~44~45133~32~45~1000" from interface 0
+Router_D: sending routing update "000000000020000000D34~44~45133~32~45~1000" from interface 2
+Router_B: Received routing update 00000000002A413~~~3~1~~~~0000~1~~~42~~33~
+Link Router_A-1 - Router_B-0: transmitting packet "00000000002A413~~~3~1~~~~0000~1~~~42~~33~" on Router_A 1 -> Router_B, 0
+Link Router_A-1 - Router_B-0: transmitting packet "0000000000200000000000000B22626~315003342" on Router_B 0 -> Router_A, 1
+Link Router_A-2 - Router_C-0: transmitting packet "00000000002A413~~~3~1~~~~0000~1~~~42~~33~" on Router_A 2 -> Router_C, 0
+Router_C: Received routing update 00000000002A413~~~3~1~~~~0000~1~~~42~~33~
+Link Router_A-2 - Router_C-0: transmitting packet "0000000000200000000000000C23535~224330051" on Router_C 0 -> Router_A, 2
+Router_A: Received routing update 0000000000200000000000000C23535~224330051
+Link Router_B-1 - Router_D-0: transmitting packet "0000000000200000000000000B22626~315003342" on Router_B 1 -> Router_D, 0
+Router_D: Received routing update 0000000000200000000000000B22626~315003342
+Router_A: Received routing update 0000000000200000000000000B22626~315003342
+Link Router_B-1 - Router_D-0: transmitting packet "000000000020000000D34~44~4~1~3~32~45~1000" on Router_D 0 -> Router_B, 1
+Router_B: Received routing update 000000000020000000D34~44~4~1~3~32~45~1000
+Router_D: Received routing update 0000000000200000000000000C23535~224330051
+Link Router_C-1 - Router_D-2: transmitting packet "0000000000200000000000000C23535~224330051" on Router_C 1 -> Router_D, 2
+Link Router_C-1 - Router_D-2: transmitting packet "000000000020000000D34~44~4~1~3~32~45~1000" on Router_D 2 -> Router_C, 1
+Router_C: Received routing update 000000000020000000D34~44~4~1~3~32~45~1000
+Link Router_A-1 - Router_B-0: transmitting packet "00000000002A4135~~351~~~~0000~15~~42~~33~" on Router_A 1 -> Router_B, 0
+Router_B: Received routing update 00000000002A4135~~351~~~~0000~15~~42~~33~
+Link Router_A-1 - Router_B-0: transmitting packet "0000000000200000000000000B226265315003342" on Router_B 0 -> Router_A, 1
+Router_A: Received routing update 0000000000200000000000000B226265315003342
+Router_C: Received routing update 00000000002A4135~~351~~~~0000~15~~42~~33~
+Link Router_A-2 - Router_C-0: transmitting packet "00000000002A4135~~351~~~~0000~15~~42~~33~" on Router_A 2 -> Router_C, 0
+Link Router_A-2 - Router_C-0: transmitting packet "0000000000200000000000000C235356224330051" on Router_C 0 -> Router_A, 2
+Router_A: Received routing update 0000000000200000000000000C235356224330051
+Link Router_B-1 - Router_D-0: transmitting packet "0000000000200000000000000B226265315003342" on Router_B 1 -> Router_D, 0
+Router_D: Received routing update 0000000000200000000000000B226265315003342
+Link Router_B-1 - Router_D-0: transmitting packet "000000000020000000D34~44~45173~32~45~1000" on Router_D 0 -> Router_B, 1
+Link Router_C-1 - Router_D-2: transmitting packet "0000000000200000000000000C235356224330051" on Router_C 1 -> Router_D, 2
+Router_D: Received routing update 0000000000200000000000000C235356224330051
+Router_B: Received routing update 000000000020000000D34~44~45173~32~45~1000
+Link Router_C-1 - Router_D-2: transmitting packet "000000000020000000D34~44~45173~32~45~1000" on Router_D 2 -> Router_C, 1
+Link Router_A-1 - Router_B-0: transmitting packet "00000000002A4135~~351~48~0000~15~~42~~33~" on Router_A 1 -> Router_B, 0
+Router_B: Received routing update 00000000002A4135~~351~48~0000~15~~42~~33~
+Router_C: Received routing update 000000000020000000D34~44~45173~32~45~1000
+Link Router_A-2 - Router_C-0: transmitting packet "00000000002A4135~~351~48~0000~15~~42~~33~" on Router_A 2 -> Router_C, 0
+Router_C: Received routing update 00000000002A4135~~351~48~0000~15~~42~~33~
+Link Router_B-1 - Router_D-0: transmitting packet "000000000020000000D34~44~45133~32~45~1000" on Router_D 0 -> Router_B, 1
+Router_B: Received routing update 000000000020000000D34~44~45133~32~45~1000
+Link Router_C-1 - Router_D-2: transmitting packet "000000000020000000D34~44~45133~32~45~1000" on Router_D 2 -> Router_C, 1
+Router_C: Received routing update 000000000020000000D34~44~45133~32~45~1000
+Router_B: Received routing update 00000000002A4135~~351~44~0000~15~~42~~33~
+Link Router_A-1 - Router_B-0: transmitting packet "00000000002A4135~~351~44~0000~15~~42~~33~" on Router_A 1 -> Router_B, 0
+Link Router_A-2 - Router_C-0: transmitting packet "00000000002A4135~~351~44~0000~15~~42~~33~" on Router_A 2 -> Router_C, 0
+Router_C: Received routing update 00000000002A4135~~351~44~0000~15~~42~~33~
+Router_A: routing table
+------------COST------------
+From Interface:  0  1  2  3
+               -------------
+To Host:    1 |  1  3  5  ~
+            2 |  ~  3  5  1
+            3 |  ~  4  4  ~
+To Router:  A |  0  0  0  0
+            B |  ~  1  5  ~
+            C |  ~  4  2  ~
+            D |  ~  3  3  ~
+
+Router_B: routing table
+---------COST---------
+From Interface:  0  1
+               -------
+To Host:    1 |  2  6
+            2 |  2  6
+            3 |  5  3
+To Router:  A |  1  5
+            B |  0  0
+            C |  3  3
+            D |  4  2
+
+Router_C: routing table
+---------COST---------
+From Interface:  0  1
+               -------
+To Host:    1 |  3  5
+            2 |  3  5
+            3 |  6  2
+To Router:  A |  2  4
+            B |  3  3
+            C |  0  0
+            D |  5  1
+
+Router_D: routing table
+----------COST----------
+From Interface:  0  1  2
+               ----------
+To Host:    1 |  4  ~  4
+            2 |  4  ~  4
+            3 |  5  1  3
+To Router:  A |  3  ~  3
+            B |  2  ~  4
+            C |  5  ~  1
+            D |  0  0  0
+
+Host_1: sending packet "00001000031Nobody expects the Spanish Inquisition"
+Link Host_1-0 - Router_A-0: transmitting packet "00001000031Nobody expects the Spanish Inquisition" on Host_1 0 -> Router_A, 0
+Router_A: forwarding packet "00001000031Nobody expects the Spanish Inquisition" from interface 0 to 1
+Link Router_A-1 - Router_B-0: transmitting packet "00001000031Nobody expects the Spanish Inquisition" on Router_A 1 -> Router_B, 0
+Router_B: forwarding packet "00001000031Nobody expects the Spanish Inquisition" from interface 0 to 1
+Link Router_B-1 - Router_D-0: transmitting packet "00001000031Nobody expects the Spanish Inquisition" on Router_B 1 -> Router_D, 0
+Router_D: forwarding packet "00001000031Nobody expects the Spanish Inquisition" from interface 0 to 1
+Link Router_D-1 - Host_3-0: transmitting packet "00001000031Nobody expects the Spanish Inquisition" on Router_D 1 -> Host_3, 0
+Host_3: received packet "00001000031Nobody expects the Spanish Inquisition"
+Host_3: sending a reply packet "Reply to: Nobody expects the Spanish Inquisition" to Router 1
+Host_3: sending packet "0000300001300003000013Reply to: Nobody expects the Spanish Inquisition"
+Link Router_D-1 - Host_3-0: transmitting packet "0000300001300003000013Reply to: Nobody expects the Spanish Inquisition" on Host_3 0 -> Router_D, 1
+Router_D: forwarding packet "0000300001300003000013Reply to: Nobody expects the Spanish Inquisition" from interface 1 to 0
+Link Router_C-1 - Router_D-2: transmitting packet "0000300001300003000013Reply to: Nobody expects the Spanish Inquisition" on Router_D 2 -> Router_C, 1
+Router_C: forwarding packet "0000300001300003000013Reply to: Nobody expects the Spanish Inquisition" from interface 1 to 0
+Link Router_A-2 - Router_C-0: transmitting packet "0000300001300003000013Reply to: Nobody expects the Spanish Inquisition" on Router_C 0 -> Router_A, 2
+Router_A: forwarding packet "0000300001300003000013Reply to: Nobody expects the Spanish Inquisition" from interface 2 to 1
+Link Host_1-0 - Router_A-0: transmitting packet "0000300001300003000013Reply to: Nobody expects the Spanish Inquisition" on Router_A 0 -> Host_1, 0
+Host_1: reply received packet "0000300001300003000013Reply to: Nobody expects the Spanish Inquisition"
+Host_3: sending packet "00003000011here come dat boi!!!! oh shit waddup!"
+Link Router_D-1 - Host_3-0: transmitting packet "00003000011here come dat boi!!!! oh shit waddup!" on Host_3 0 -> Router_D, 1
+Router_D: forwarding packet "00003000011here come dat boi!!!! oh shit waddup!" from interface 1 to 0
+Link Router_C-1 - Router_D-2: transmitting packet "00003000011here come dat boi!!!! oh shit waddup!" on Router_D 2 -> Router_C, 1
+Router_C: forwarding packet "00003000011here come dat boi!!!! oh shit waddup!" from interface 1 to 0
+Link Router_A-2 - Router_C-0: transmitting packet "00003000011here come dat boi!!!! oh shit waddup!" on Router_C 0 -> Router_A, 2
+Router_A: forwarding packet "00003000011here come dat boi!!!! oh shit waddup!" from interface 2 to 1
+Host_1: received packet "00003000011here come dat boi!!!! oh shit waddup!"
+Link Host_1-0 - Router_A-0: transmitting packet "00003000011here come dat boi!!!! oh shit waddup!" on Router_A 0 -> Host_1, 0
+Host_1: sending a reply packet "Reply to: here come dat boi!!!! oh shit waddup!" to Router 3
+Host_1: sending packet "0000100003300001000033Reply to: here come dat boi!!!! oh shit waddup!"
+Link Host_1-0 - Router_A-0: transmitting packet "0000100003300001000033Reply to: here come dat boi!!!! oh shit waddup!" on Host_1 0 -> Router_A, 0
+Router_A: forwarding packet "0000100003300001000033Reply to: here come dat boi!!!! oh shit waddup!" from interface 0 to 1
+Link Router_A-1 - Router_B-0: transmitting packet "0000100003300001000033Reply to: here come dat boi!!!! oh shit waddup!" on Router_A 1 -> Router_B, 0
+Router_B: forwarding packet "0000100003300001000033Reply to: here come dat boi!!!! oh shit waddup!" from interface 0 to 1
+Link Router_B-1 - Router_D-0: transmitting packet "0000100003300001000033Reply to: here come dat boi!!!! oh shit waddup!" on Router_B 1 -> Router_D, 0
+Router_D: forwarding packet "0000100003300001000033Reply to: here come dat boi!!!! oh shit waddup!" from interface 0 to 1
+Link Router_D-1 - Host_3-0: transmitting packet "0000100003300001000033Reply to: here come dat boi!!!! oh shit waddup!" on Router_D 1 -> Host_3, 0
+Host_3: reply received packet "0000100003300001000033Reply to: here come dat boi!!!! oh shit waddup!"
+Network: Ending
+Router_A: Ending
+Router_D: Ending
+Host_1: Ending
+Router_C: Ending
+Router_B: Ending
+Host_2: Ending
+Host_3: Ending
+All simulation threads joined
