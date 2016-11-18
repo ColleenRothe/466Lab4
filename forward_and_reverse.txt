@@ -1,4 +1,4 @@
-Colleen-Rothes-MacBook-Pro:prog4 colleenrothe$ python3 simulation.py
+C:\Users\Lizzi\OneDrive\Documents\Junior Year\Networks\466Lab4>simulation.py
 Created link Link Host_1-0 - Router_A-0
 Created link Link Router_A-1 - Router_B-0
 Created link Link Router_B-1 - Host_2-0
@@ -7,44 +7,45 @@ Host_2: Starting
 Router_A: Starting
 Router_B: Starting
 Network: Starting
-Router_A: sending routing update "0000021~~~" from interface 1
-Link Router_A-1 - Router_B-0: transmitting packet "0000021~~~" on Router_A 1 -> Router_B, 0
-Host_1: sending packet "000021Sample client data 0"
-Router_B: Received routing update 0000021~~~
-Link Host_1-0 - Router_A-0: transmitting packet "000021Sample client data 0" on Host_1 0 -> Router_A, 0
-Router_A: forwarding packet "000021Sample client data 0" from interface 0 to 1
-Router_B: sending routing update "0000021~~3" from interface 0
-Link Router_A-1 - Router_B-0: transmitting packet "000021Sample client data 0" on Router_A 1 -> Router_B, 0
-Router_B: forwarding packet "000021Sample client data 0" from interface 0 to 1
-Link Router_A-1 - Router_B-0: transmitting packet "0000021~~3" on Router_B 0 -> Router_A, 1
-Router_A: Received routing update 0000021~~3
-Router_A: sending routing update "0000021~~3" from interface 1
-Link Router_B-1 - Host_2-0: transmitting packet "000021Sample client data 0" on Router_B 1 -> Host_2, 0
-Link Router_A-1 - Router_B-0: transmitting packet "0000021~~3" on Router_A 1 -> Router_B, 0
-Router_B: Received routing update 0000021~~3
-Host_2: received packet "000021Sample client data 0"
+Router_A: sending routing update "000000000021~~~" from interface 1
+Link Router_A-1 - Router_B-0: transmitting packet "000000000021~~~" on Router_A 1 -> Router_B, 0
+Router_B: Received routing update 000000000021~~~
+Router_B: sending routing update "000000000021~~3" from interface 0
+Link Router_A-1 - Router_B-0: transmitting packet "000000000021~~3" on Router_B 0 -> Router_A, 1
+Router_A: Received routing update 000000000021~~3
+Router_A: sending routing update "000000000021~~3" from interface 1
+Router_B: Received routing update 000000000021~~3
+Link Router_A-1 - Router_B-0: transmitting packet "000000000021~~3" on Router_A 1 -> Router_B, 0
 Router_A: routing table
      Cost To:
          1 2
         ----
-From: 0| 1 ~ 
-      1| ~ 3 
+From: 0| 1 ~
+      1| ~ 3
 Router_B: routing table
      Cost To:
          1 2
         ----
-From: 0| 1 ~ 
-      1| ~ 3 
-Host_2: sending packet "000011Sample client data 0"
-Link Router_B-1 - Host_2-0: transmitting packet "000011Sample client data 0" on Host_2 0 -> Router_B, 1
-Router_B: forwarding packet "000011Sample client data 0" from interface 1 to 0
-Link Router_A-1 - Router_B-0: transmitting packet "000011Sample client data 0" on Router_B 0 -> Router_A, 1
-Router_A: forwarding packet "000011Sample client data 0" from interface 1 to 0
-Link Host_1-0 - Router_A-0: transmitting packet "000011Sample client data 0" on Router_A 0 -> Host_1, 0
-Host_1: received packet "000011Sample client data 0"
-Router_A: Ending
-Router_B: Ending
-Network: Ending
-Host_1: Ending
+From: 0| 1 ~
+      1| ~ 3
+Host_1: sending packet "00001000021Including memes in your networking assignment. Oh shit, we've got a badass over here."
+Link Host_1-0 - Router_A-0: transmitting packet "00001000021Including memes in your networking assignment. Oh shit, we've got a badass over here." on Host_1 0 -> Router_A, 0
+Router_A: forwarding packet "00001000021Including memes in your networking assignment. Oh shit, we've got a badass over here." from interface 0 to 1
+Router_B: forwarding packet "00001000021Including memes in your networking assignment. Oh shit, we've got a badass over here." from interface 0 to 1
+Link Router_A-1 - Router_B-0: transmitting packet "00001000021Including memes in your networking assignment. Oh shit, we've got a badass over here." on Router_A 1 -> Router_B, 0
+Link Router_B-1 - Host_2-0: transmitting packet "00001000021Including memes in your networking assignment. Oh shit, we've got a badass over here." on Router_B 1 -> Host_2, 0
+Host_2: received packet "00001000021Including memes in your networking assignment. Oh shit, we've got a badass over here."
+Host_2: sending a reply packet "Reply to: Including memes in your networking assignment. Oh shit, we've got a badass over here." to Router 1
+Host_2: sending packet "0000200001300002000013Reply to: Including memes in your networking assignment. Oh shit, we've got a badass over here."
+Link Router_B-1 - Host_2-0: transmitting packet "0000200001300002000013Reply to: Including memes in your networking assignment. Oh shit, we've got a badass over here." on Host_2 0 -> Router_B, 1
+Router_B: forwarding packet "0000200001300002000013Reply to: Including memes in your networking assignment. Oh shit, we've got a badass over here." from interface 1 to 0
+Link Router_A-1 - Router_B-0: transmitting packet "0000200001300002000013Reply to: Including memes in your networking assignment. Oh shit, we've got a badass over here." on Router_B 0 -> Router_A, 1
+Router_A: forwarding packet "0000200001300002000013Reply to: Including memes in your networking assignment. Oh shit, we've got a badass over here." from interface 1 to 0
+Link Host_1-0 - Router_A-0: transmitting packet "0000200001300002000013Reply to: Including memes in your networking assignment. Oh shit, we've got a badass over here." on Router_A 0 -> Host_1, 0
+Host_1: reply received packet "0000200001300002000013Reply to: Including memes in your networking assignment. Oh shit, we've got a badass over here."
 Host_2: Ending
+Router_A: Ending
+Network: Ending
+Router_B: Ending
+Host_1: Ending
 All simulation threads joined
