@@ -1,3 +1,4 @@
+C:\Users\Lizzi\OneDrive\Documents\Junior Year\Networks\466Lab4>simulation.py
 Created link Link Host_1-0 - Router_A-0
 Created link Link Host_2-0 - Router_A-3
 Created link Link Router_A-1 - Router_B-0
