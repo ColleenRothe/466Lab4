@@ -52,13 +52,15 @@ class Interface:
 # the fields necessary for the completion of this assignment.
 class NetworkPacket:
     ## packet encoding lengths
+    src_addr_S_length = 5
     dst_addr_S_length = 5
     prot_S_length = 1
 
     ##@param dst_addr: address of the destination host
     # @param data_S: packet payload
     # @param prot_S: upper layer protocol for the packet (data, or control)
-    def __init__(self, dst_addr, prot_S, data_S):
+    def __init__(self, src_addr, dst_addr, prot_S, data_S):
+        self.src_addr = src_addr
         self.dst_addr = dst_addr
         self.data_S = data_S
         self.prot_S = prot_S
@@ -69,11 +71,14 @@ class NetworkPacket:
 
     ## convert packet to a byte string for transmission over links
     def to_byte_S(self):
-        byte_S = str(self.dst_addr).zfill(self.dst_addr_S_length)
+        byte_S = str(self.src_addr).zfill(self.src_addr_S_length)
+        byte_S += str(self.dst_addr).zfill(self.dst_addr_S_length)
         if self.prot_S == 'data':
             byte_S += '1'
         elif self.prot_S == 'control':
             byte_S += '2'
+        elif self.prot_S == 'reply':
+            byte_S += '3'
         else:
             raise ('%s: unknown prot_S option: %s' % (self, self.prot_S))
         byte_S += self.data_S
@@ -83,16 +88,20 @@ class NetworkPacket:
     # @param byte_S: byte string representation of the packet
     @classmethod
     def from_byte_S(self, byte_S):
-        dst_addr = int(byte_S[0: NetworkPacket.dst_addr_S_length])
-        prot_S = byte_S[NetworkPacket.dst_addr_S_length: NetworkPacket.dst_addr_S_length + NetworkPacket.prot_S_length]
+        src_addr = int(byte_S[0: NetworkPacket.src_addr_S_length])
+        dst_addr = int(byte_S[NetworkPacket.src_addr_S_length : NetworkPacket.src_addr_S_length + NetworkPacket.dst_addr_S_length])
+        prot_S = byte_S[NetworkPacket.src_addr_S_length + NetworkPacket.dst_addr_S_length: NetworkPacket.src_addr_S_length + NetworkPacket.dst_addr_S_length + NetworkPacket.prot_S_length]
         if prot_S == '1':
             prot_S = 'data'
         elif prot_S == '2':
             prot_S = 'control'
+        elif prot_S == '3':
+            prot_S = 'reply'
         else:
             raise ('%s: unknown prot_S field: %s' % (self, prot_S))
-        data_S = byte_S[NetworkPacket.dst_addr_S_length + NetworkPacket.prot_S_length:]
-        return self(dst_addr, prot_S, data_S)
+        data_S = byte_S[NetworkPacket.src_addr_S_length + NetworkPacket.dst_addr_S_length + NetworkPacket.prot_S_length:]
+        return self(src_addr, dst_addr, prot_S, data_S)
+
 
 
 ## Implements a network host for receiving and transmitting data
@@ -110,8 +119,8 @@ class Host:
     ## create a packet and enqueue for transmission
     # @param dst_addr: destination address for the packet
     # @param data_S: data being transmitted to the network layer
-    def udt_send(self, dst_addr, data_S):
-        p = NetworkPacket(dst_addr, 'data', data_S)
+    def udt_send(self, src_addr, dst_addr, prot_S, data_S):
+        p = NetworkPacket(src_addr, dst_addr, prot_S, data_S)
         print('%s: sending packet "%s"' % (self, p))
         self.intf_L[0].put(p.to_byte_S(), 'out')  # send packets always enqueued successfully
 
@@ -119,7 +128,19 @@ class Host:
     def udt_receive(self):
         pkt_S = self.intf_L[0].get('in')
         if pkt_S is not None:
-            print('%s: received packet "%s"' % (self, pkt_S))
+            p = NetworkPacket.from_byte_S(pkt_S)
+            if p.prot_S == 'data':
+                print('%s: received packet "%s"' % (self, pkt_S))
+                message = "Reply to: " + p.data_S
+                p2 = NetworkPacket(p.dst_addr, p.src_addr, 'reply', message)
+                print('%s: sending a reply packet "%s" to Router %s' % (self, message, p.src_addr))
+                self.udt_send(self.addr, p.src_addr, 'reply', p2.to_byte_S())
+            elif p.prot_S == 'control':
+                print('%s: received packet "%s"' % (self, pkt_S))
+            elif p.prot_S == 'reply':
+                print('%s: reply received packet "%s"' % (self, pkt_S))
+            else:
+                raise Exception('%s: Unknown packet type in packet %s' % (self, p))
 
     ## thread target for the host to keep receiving data
     def run(self):
@@ -199,6 +220,8 @@ class Router:
                 p = NetworkPacket.from_byte_S(pkt_S)  # parse a packet out
                 if p.prot_S == 'data':
                     self.forward_packet(p, i)
+                elif p.prot_S == 'reply':
+                    self.forward_packet(p, i)
                 elif p.prot_S == 'control':
                     self.update_routes(p, i)
                 else:
@@ -247,7 +270,7 @@ class Router:
 
         # get rid of the first six characters....only want the routing table
         p2 = p.to_byte_S()
-        p2 = p2[6: len(p2)]
+        p2 = p2[11: len(p2)]
 
         ##get the new values from the routing table you got sent
 
@@ -328,7 +351,7 @@ class Router:
 
         p2 = Message(zero_one, zero_two, one_one, one_two)
 
-        p = NetworkPacket(0, 'control', p2.to_byte_S())
+        p = NetworkPacket(0, 0, 'control', p2.to_byte_S())
 
         try:
             # TODO: add logic to send out a route update

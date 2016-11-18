@@ -55,13 +55,6 @@ if __name__ == '__main__':
 
     # send out routing information from router A to router B interface 0
     router_a.send_routes(1)
-
-    # create some send events
-    for i in range(1):
-        client.udt_send(2, 'Sample client data %d' % i)
-
-
-
     # give the network sufficient time to transfer all packets before quitting
     sleep(simulation_time)
 
@@ -70,8 +63,8 @@ if __name__ == '__main__':
         if str(type(obj)) == "<class 'network.Router'>":
             obj.print_routes()
 
-    for i in range(1):
-        server.udt_send(1, 'Sample client data %d' % i)
+    # create some send events
+    client.udt_send( 1, 2, 'data', 'Including memes in your networking assignment. Oh shit, we\'ve got a badass over here.')
 
     sleep(simulation_time)
 
@@ -82,7 +75,3 @@ if __name__ == '__main__':
         t.join()
 
     print("All simulation threads joined")
-
-
-
-# writes to host periodically

@@ -40,7 +40,7 @@ class Link:
             try:
                 intf_b.put(pkt_S, 'in')
                 print('%s: transmitting packet "%s" on %s %s -> %s, %s' % (
-                self, pkt_S, node_a, node_a_intf, node_b, node_b_intf))
+                    self, pkt_S, node_a, node_a_intf, node_b, node_b_intf))
             except queue.Full:
                 print('%s: packet lost' % (self))
                 pass
@@ -76,4 +76,3 @@ class LinkLayer:
             if self.stop:
                 print (threading.currentThread().getName() + ': Ending')
                 return
-
